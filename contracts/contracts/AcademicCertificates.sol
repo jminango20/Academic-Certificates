@@ -64,7 +64,7 @@ contract AcademicCertificates {
     function createDiscipline(
         string memory _disciplineName,
         uint256 _studentCount
-    ) external onlyOwner {
+    ) public onlyOwner {
 
         require(disciplines[_disciplineName].issuer == address(0), "Disciplina con este nombre ya existe");
 
@@ -76,10 +76,16 @@ contract AcademicCertificates {
 
     }
 
+    function getDiscipline(string memory _disciplineName) public view returns (Discipline memory) {
+        return disciplines[_disciplineName];
+    }
+
+
+
     function updateStudentCount(
     string memory _disciplineName,
     uint256 _newStudentCount
-    ) external onlyOwner {
+    ) public onlyOwner {
         
         require(disciplines[_disciplineName].issuer != address(0), "Disciplina con este nombre aun no existe. Por favor creale primero");
         
@@ -95,7 +101,7 @@ contract AcademicCertificates {
         string memory _personalIdentifier,
         string memory _studentName,
         string memory _disciplineName
-    ) external onlyOwner {
+    ) public onlyOwner {
 
         require(disciplines[_disciplineName].issuer != address(0), "Disciplina no registrada aun");
 
